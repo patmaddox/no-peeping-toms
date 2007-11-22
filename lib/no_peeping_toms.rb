@@ -1,5 +1,5 @@
 module NoPeepingToms
-  def with_observers(observer_syms = [])
+  def with_observers(*observer_syms)
     observer_names = [observer_syms].flatten
     observers = observer_names.map { |o| o.to_s.classify.constantize.instance }
     
