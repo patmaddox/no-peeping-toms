@@ -30,7 +30,7 @@ module NoPeepingTomsSpec
     end
 
     it "should register a name change with the person observer turned on by name" do
-      Person.with_observers("NoPeepingTomsSpec::PersonObserver") do
+      ActiveRecord::Observer.with_observers("NoPeepingTomsSpec::PersonObserver") do
         @person.update_attribute :name, "Name change"
         $observer_called_names.pop.should == "Name change"
       end
@@ -42,7 +42,7 @@ module NoPeepingTomsSpec
     end
     
     it "should register a name change with the person observer turned on by class reference" do
-      Person.with_observers(NoPeepingTomsSpec::PersonObserver) do
+      ActiveRecord::Observer.with_observers(NoPeepingTomsSpec::PersonObserver) do
         @person.update_attribute :name, "Name change"
         $observer_called_names.pop.should == "Name change"
       end
@@ -59,7 +59,7 @@ module NoPeepingTomsSpec
           $observer_called_names.push person.name
         end
       end
-      Person.with_observers(observer) do
+      ActiveRecord::Observer.with_observers(observer) do
         @person.update_attribute :name, "Name change"
         $observer_called_names.pop.should == "Name change"
       end
@@ -72,7 +72,7 @@ module NoPeepingTomsSpec
 
     
     it "should handle multiple observers" do
-      Person.with_observers("NoPeepingTomsSpec::PersonObserver", "NoPeepingTomsSpec::AnotherObserver") do
+      ActiveRecord::Observer.with_observers("NoPeepingTomsSpec::PersonObserver", "NoPeepingTomsSpec::AnotherObserver") do
         @person.update_attribute :name, "Name change"
         $observer_called_names.pop.should == "Name change"
       end
@@ -91,7 +91,7 @@ module NoPeepingTomsSpec
         def before_update(person) ; $observer_called_names.push "#{person.name} 2" ; end
       end
 
-      Person.with_observers(observer1, observer2) do
+      ActiveRecord::Observer.with_observers(observer1, observer2) do
         @person.update_attribute :name, "Name change"
         $observer_called_names.pop.should == "Name change 2"
         $observer_called_names.pop.should == "Name change 1"
