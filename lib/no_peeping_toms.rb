@@ -22,6 +22,7 @@ module NoPeepingToms
         o.respond_to?(:instance) ? o.instance : o.to_s.classify.constantize.instance
       end
       yield
+    ensure
       self.peeping_toms.clear
     end
   end
