@@ -55,6 +55,7 @@ module NoPeepingTomsSpec
 
     it "should register a name change with an anonymous observer" do
       observer = Class.new(ActiveRecord::Observer) do
+        observe NoPeepingTomsSpec::Person
         def before_update(person)
           $observer_called_names.push person.name
         end
@@ -85,9 +86,11 @@ module NoPeepingTomsSpec
 
     it "should handle multiple anonymous observers" do
       observer1 = Class.new(ActiveRecord::Observer) do
+        observe NoPeepingTomsSpec::Person
         def before_update(person) ; $observer_called_names.push "#{person.name} 1" ; end
       end
       observer2 = Class.new(ActiveRecord::Observer) do
+        observe NoPeepingTomsSpec::Person
         def before_update(person) ; $observer_called_names.push "#{person.name} 2" ; end
       end
 
@@ -101,6 +104,15 @@ module NoPeepingTomsSpec
       $observer_called_names.pop.should be_blank
       
       $calls_to_another_observer.should == 0
+    end
+
+    it "should ensure peeping toms are reset after raised exception" do
+      lambda {
+        ActiveRecord::Observer.with_observers(NoPeepingTomsSpec::PersonObserver) do
+          raise ArgumentError, "Michael, I've made a huge mistake"
+        end
+      }.should raise_error(ArgumentError)
+      ActiveRecord::Observer.peeping_toms.should == []
     end
   end
 end
