@@ -27,3 +27,5 @@ module NoPeepingToms
     end
   end
 end
+
+ActiveRecord::Observer.send :include, NoPeepingToms
