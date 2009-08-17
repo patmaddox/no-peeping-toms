@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{no_peeping_toms}
-  s.version = "0.1.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pat Maddox", "Brandon Keepers"]
@@ -14,9 +14,12 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "README",
+     "Rakefile",
+     "VERSION",
      "init.rb",
      "install.rb",
      "lib/no_peeping_toms.rb",
+     "no_peeping_toms.gemspec",
      "spec/db/database.yml",
      "spec/db/schema.rb",
      "spec/no_peeping_toms_spec.rb",
