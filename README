@@ -3,6 +3,10 @@ no_peeping_toms
 
 This plugin disables observers in your specs, so that model specs can run in complete isolation.
 
+To disable observers, place the following code in your test.rb, or spec_helper.rb, or wherever:
+
+  NoPeepingToms.disable_observers
+
 You can choose to run some code with observers turned on.  This is useful when spec'ing an observer.  For example, if you write the following observer:
 
     class PersonObserver < ActiveRecord::Observer

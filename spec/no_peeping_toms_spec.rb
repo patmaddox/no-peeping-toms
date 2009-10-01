@@ -1,5 +1,14 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
+describe "Configuring NoPeepingToms" do
+  describe "#disable_observers" do
+    it "mixes in NoPeepingToms module to ActiveRecord::Observer" do
+      ActiveRecord::Observer.should_receive(:send).with(:include, NoPeepingToms)
+      NoPeepingToms.disable_observers
+    end
+  end
+end
+
 module NoPeepingTomsSpec
   class Person < ActiveRecord::Base; end
   

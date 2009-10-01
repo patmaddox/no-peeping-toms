@@ -1,4 +1,8 @@
 module NoPeepingToms
+  def self.disable_observers
+    ActiveRecord::Observer.send :include, NoPeepingToms
+  end
+
   def self.included(base)
     base.send :include, NoPeepingToms::InstanceMethods
     base.extend NoPeepingToms::ClassMethods
