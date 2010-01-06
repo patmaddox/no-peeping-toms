@@ -9,7 +9,11 @@ To disable observers, place the following code in your test.rb, or spec_helper.r
 
   NoPeepingToms.disable_observers
 
-You can choose to run some code with observers turned on.  This is useful when spec'ing an observer.  For example, if you write the following observer:
+You can easily reenable observers:
+
+  NoPeepingToms.enable_observers
+
+You can choose to run some code with specific observers turned on.  This is useful when spec'ing an observer.  For example, if you write the following observer:
 
     class PersonObserver < ActiveRecord::Observer
       def before_update(person)
