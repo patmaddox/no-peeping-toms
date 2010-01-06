@@ -1,6 +1,8 @@
 no_peeping_toms
 =============
 
+Originally a plugin, now gemified.  'gem install no_peeping_toms'
+
 This plugin disables observers in your specs, so that model specs can run in complete isolation.
 
 You can choose to run some code with observers turned on.  This is useful when spec'ing an observer.  For example, if you write the following observer:
