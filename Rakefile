@@ -14,7 +14,7 @@ Jeweler::Tasks.new do |s|
   s.summary = "Disables observers during testing, allowing you to write model tests that are completely decoupled from the observer."
   s.description = s.summary
   s.email = "pat.maddox@gmail.com"
-  s.homepage = "http://github.com/pat-maddox"
+  s.homepage = "http://github.com/patmaddox/no-peeping-toms"
   s.authors = ["Pat Maddox", "Brandon Keepers"]
   s.add_dependency "activerecord", ['>= 1.1']
   s.files -= ['.gitignore', 'init.rb']
