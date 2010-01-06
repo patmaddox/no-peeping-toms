@@ -23,18 +23,18 @@ module NoPeepingTomsSpec
   describe NoPeepingToms, "configuration" do
     it "enables observers by default" do
       load 'no_peeping_toms.rb'
-      NoPeepingToms.default_observers_enabled?.should be_true
+      ActiveRecord::Observer.default_observers_enabled.should be_true
     end
 
     it "runs default observers when default observers are enabled" do
-      NoPeepingToms.enable_observers
+      ActiveRecord::Observer.enable_observers
       PersonObserver.called = false
       Person.create!
       PersonObserver.called.should be_true
     end
 
     it "does not run default observers when default observers are disabled" do
-      NoPeepingToms.disable_observers
+      ActiveRecord::Observer.disable_observers
       PersonObserver.called = false
       Person.create!
       PersonObserver.called.should be_false
@@ -43,7 +43,7 @@ module NoPeepingTomsSpec
 
   describe ActiveRecord::Observer, 'with_observers' do
     before(:each) do
-      NoPeepingToms.disable_observers
+      ActiveRecord::Observer.disable_observers
     end
 
     it "should enable an observer via stringified class name" do
