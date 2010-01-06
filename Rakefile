@@ -17,5 +17,8 @@ Jeweler::Tasks.new do |s|
   s.homepage = "http://github.com/pat-maddox"
   s.authors = ["Pat Maddox", "Brandon Keepers"]
   s.add_dependency "activerecord", ['>= 1.1']
+  s.files -= ['.gitignore', 'init.rb']
   s.test_files = Dir['spec/**/*']
 end
+
+Jeweler::GemcutterTasks.new
