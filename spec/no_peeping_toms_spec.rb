@@ -20,6 +20,10 @@ module NoPeepingTomsSpec
     end
   end
 
+  # Register the observers with the host app
+  PersonObserver.instance
+  AnotherObserver.instance
+
   describe NoPeepingToms, "configuration" do
     it "enables observers by default" do
       load 'no_peeping_toms.rb'
