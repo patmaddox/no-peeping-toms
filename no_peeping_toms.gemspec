@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
      "spec/spec_helper.rb",
      "uninstall.rb"
   ]
-  s.homepage = %q{http://github.com/pat-maddox}
+  s.homepage = %q{http://github.com/patmaddox/no-peeping-toms}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
