@@ -30,7 +30,7 @@ You can spec the Person class in complete isolation.
   
       # Run only a portion of code with certain observers turned on
       it "should register a name change with the person observer turned on" do
-        Person.with_observers(:person_observer) do
+        ActiveRecord::Observer.with_observers(:person_observer) do
           lambda { @person.update_attribute :name, "Don Juan Demarco" }.should change(NameChange, :count).by(1)
         end
     
