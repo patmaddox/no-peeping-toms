@@ -1,0 +1,8 @@
+=== Version 1.0.1 / 2010-01-06
+
+* official gem release
+* Updated #with_observers to take in class references, or an anonymous observer (Zach Dennis)
+* peeping toms can be re-enabled, specifically for use in Cucumber (Brandon Keepers)
+  To enable:
+  ActiveRecord::Observer.allow_peeping_toms = true
+* Fixed broken specs. Added fix for exceptions raised in with_observers (Jeff Siegel)
