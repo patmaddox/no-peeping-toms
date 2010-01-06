@@ -16,13 +16,13 @@ Gem::Specification.new do |s|
     "README"
   ]
   s.files = [
-    "README",
+    "History.rdoc",
+     "README",
      "Rakefile",
      "VERSION",
      "install.rb",
      "lib/no_peeping_toms.rb",
      "no_peeping_toms.gemspec",
-     "spec/db/History.rdoc",
      "spec/db/database.yml",
      "spec/db/schema.rb",
      "spec/no_peeping_toms_spec.rb",
@@ -36,7 +36,6 @@ Gem::Specification.new do |s|
   s.summary = %q{Disables observers during testing, allowing you to write model tests that are completely decoupled from the observer.}
   s.test_files = [
     "spec/db",
-     "spec/db/History.rdoc",
      "spec/db/database.yml",
      "spec/db/schema.rb",
      "spec/no_peeping_toms_spec.rb",
