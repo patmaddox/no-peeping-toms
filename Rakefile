@@ -19,6 +19,7 @@ Jeweler::Tasks.new do |s|
   s.add_dependency "activerecord", ['>= 1.1']
   s.files -= ['.gitignore', 'init.rb']
   s.test_files = Dir['spec/**/*']
+  s.test_files -= ['spec/debug.log']
 end
 
 Jeweler::GemcutterTasks.new
