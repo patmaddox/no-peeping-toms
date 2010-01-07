@@ -51,8 +51,8 @@ Known to work against Rails versions >= 2.2.2 (run rake:multi_rails:all to test 
 Cool people who have contributed to NoPeepingToms:
   * Brandon Keepers
   * Corey Haines
-  * Jeff Siegel
   * Drew Olson
+  * Jeff Siegel
   * Zach Dennis
 
 If you think your name should be here, shoot me an email and I'll add it ASAP.
