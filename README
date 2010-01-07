@@ -46,6 +46,8 @@ You can spec the Person class in complete isolation.
       end
     end
 
+Known to work against Rails versions >= 2.2.2 (run rake:multi_rails:all to test against versions installed on your machine)
+
 Cool people who have contributed to NoPeepingToms:
   * Brandon Keepers
   * Corey Haines

@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'multi_rails'
+require 'multi_rails_init'
 require File.expand_path(File.dirname(__FILE__) + '/host_app/spec/spec_helper')
 $:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
 require 'no_peeping_toms'
