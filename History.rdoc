@@ -1,3 +1,6 @@
+=== Version 2.0.1 / 2011-02-16
+* Supports current Rails 3.x release.  No longer supports Rails 2.
+
 === Version 1.1.0 / 2010-01-06
 
 * Explicit enable/disable API (Corey Haines & Drew Olson)

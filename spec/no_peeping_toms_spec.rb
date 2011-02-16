@@ -88,7 +88,7 @@ module NoPeepingTomsSpec
           raise ArgumentError, "Michael, I've made a huge mistake"
         end
       }.should raise_error(ArgumentError)
-      ActiveRecord::Observer.peeping_toms.should == []
+      ActiveRecord::Observer.observers_enabled.should_not include(NoPeepingTomsSpec::PersonObserver)
     end
   end
 end
