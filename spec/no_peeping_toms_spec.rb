@@ -2,12 +2,14 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 module NoPeepingTomsSpec
   class Person < ActiveRecord::Base; end
+  class SpecialPerson < Person; end
   
   class PersonObserver < ActiveRecord::Observer
     cattr_accessor :called
 
     def before_create(person)
-      self.class.called = true
+      self.class.called ||= 0
+      self.class.called += 1
     end
   end
   
@@ -16,7 +18,8 @@ module NoPeepingTomsSpec
     cattr_accessor :called
 
     def before_create(person)
-      self.class.called = true
+      self.class.called ||= 0
+      self.class.called += 1
     end
   end
 
@@ -32,16 +35,23 @@ module NoPeepingTomsSpec
 
     it "runs default observers when default observers are enabled" do
       ActiveRecord::Observer.enable_observers
-      PersonObserver.called = false
+      PersonObserver.called = 0
       Person.create!
-      PersonObserver.called.should be_true
+      PersonObserver.called.should == 1
     end
 
     it "does not run default observers when default observers are disabled" do
       ActiveRecord::Observer.disable_observers
-      PersonObserver.called = false
+      PersonObserver.called = 0
       Person.create!
-      PersonObserver.called.should be_false
+      PersonObserver.called.should == 0
+    end
+
+    it "only runs observers once on descendent classes" do
+      ActiveRecord::Observer.enable_observers
+      PersonObserver.called = 0
+      SpecialPerson.create!
+      PersonObserver.called.should == 1
     end
   end
 
@@ -70,16 +80,6 @@ module NoPeepingTomsSpec
       end
       PersonObserver.called.should be_true
       AnotherObserver.called.should be_true
-    end
-
-    it "should accept anonymous observers" do
-      called = false
-      observer = Class.new(ActiveRecord::Observer) do
-        observe NoPeepingTomsSpec::Person
-        define_method(:before_create) {|person| called = true }
-      end
-      ActiveRecord::Observer.with_observers(observer) { Person.create! }
-      called.should be_true
     end
 
     it "should ensure peeping toms are reset after raised exception" do

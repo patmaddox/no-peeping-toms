@@ -1,5 +1,6 @@
 require 'active_record'
 require 'active_support/core_ext/class/attribute_accessors'
+require 'active_support/core_ext/string/inflections'
 
 module NoPeepingToms
   extend ActiveSupport::Concern
@@ -52,11 +53,16 @@ module NoPeepingToms
     # way so far
     def define_callbacks_with_enabled_check(klass)
       observer = self
+      observer_name = observer.class.name.underscore.gsub('/', '__')
 
       ActiveRecord::Callbacks::CALLBACKS.each do |callback|
         next unless respond_to?(callback)
-        klass.send(callback) do |record|
-          observer.send(callback, record) if observer.observer_enabled?
+        callback_meth = :"_notify_#{observer_name}_for_#{callback}"
+        unless klass.respond_to?(callback_meth)
+          klass.send(:define_method, callback_meth) do
+            observer.send(callback, self) if observer.observer_enabled?
+          end
+          klass.send(callback, callback_meth)
         end
       end
     end
