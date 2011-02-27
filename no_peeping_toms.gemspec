@@ -6,11 +6,12 @@ Gem::Specification.new do |s|
   s.name        = "no_peeping_toms"
   s.version     = NoPeepingToms::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Andy Lindeman", "Pat Maddox", "Brandon Keepers"]
-  s.email       = ["alindeman@gmail.com", "pat.maddox@gmail.com"]
-  s.homepage    = "https://github.com/alindeman/no_peeping_toms"
+  s.authors     = ["Pat Maddox"]
+  s.email       = ["pat.maddox@gmail.com"]
+  s.homepage    = "https://github.com/patmaddox/no_peeping_toms"
   s.summary     = %q{Disables observers during testing, allowing you to write model tests that are completely decoupled from the observer.}
   s.description = %q{Disables observers during testing, allowing you to write model tests that are completely decoupled from the observer.}
+  s.rubyforge_project = "no_peeping_toms"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
