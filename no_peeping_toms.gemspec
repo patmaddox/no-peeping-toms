@@ -13,9 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{Disables observers during testing, allowing you to write model tests that are completely decoupled from the observer.}
   s.rubyforge_project = "no_peeping_toms"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = Dir["*.rdoc", "{lib,spec}/**/*"]
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency 'activerecord', '>=3.0.0'
