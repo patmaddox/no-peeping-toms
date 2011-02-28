@@ -63,5 +63,6 @@ You can spec the Person class in complete isolation.
 * Jeff Siegel
 * Zach Dennis
 * Andy Lindeman
+* Ryan McGeary
 
 Copyright (c) 2007-2011 Pat Maddox, released under the MIT license.
