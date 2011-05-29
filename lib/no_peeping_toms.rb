@@ -67,6 +67,12 @@ module NoPeepingToms
       end
     end
 
+    # Enables interception of custom observer notifications, i.e.
+    #   notify_observers(:custom_notification)
+    def update(*args, &block)
+      super if observer_enabled?
+    end
+
     # Determines whether this observer should be run
     def observer_enabled?
       self.class.observer_enabled?(self)
