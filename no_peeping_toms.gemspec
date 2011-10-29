@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Pat Maddox"]
   s.email       = ["pat.maddox@gmail.com"]
-  s.homepage    = "https://github.com/patmaddox/no_peeping_toms"
+  s.homepage    = "https://github.com/patmaddox/no-peeping-toms"
   s.summary     = %q{Disables observers during testing, allowing you to write model tests that are completely decoupled from the observer.}
   s.description = %q{Disables observers during testing, allowing you to write model tests that are completely decoupled from the observer.}
   s.rubyforge_project = "no_peeping_toms"
