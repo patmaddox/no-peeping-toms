@@ -1,3 +1,3 @@
 module NoPeepingToms
-  VERSION = "2.1.1"
+  VERSION = "3.0.0000000001"
 end
