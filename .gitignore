@@ -3,3 +3,4 @@
 Gemfile.lock
 pkg/*
 spec/debug.log
+.*.sw?
