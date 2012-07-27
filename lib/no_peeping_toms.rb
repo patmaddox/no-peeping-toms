@@ -45,38 +45,36 @@ module NoPeepingToms
     end
   end
 
-  module InstanceMethods
-    # Overrides ActiveRecord#define_callbacks so that observers are only called
-    # when enabled.
-    #
-    # This is a bit yuck being a protected method, but appears to be the cleanest
-    # way so far
-    def define_callbacks_with_enabled_check(klass)
-      observer = self
-      observer_name = observer.class.name.underscore.gsub('/', '__')
+  # Overrides ActiveRecord#define_callbacks so that observers are only called
+  # when enabled.
+  #
+  # This is a bit yuck being a protected method, but appears to be the cleanest
+  # way so far
+  def define_callbacks_with_enabled_check(klass)
+    observer = self
+    observer_name = observer.class.name.underscore.gsub('/', '__')
 
-      ActiveRecord::Callbacks::CALLBACKS.each do |callback|
-        next unless respond_to?(callback)
-        callback_meth = :"_notify_#{observer_name}_for_#{callback}"
-        unless klass.respond_to?(callback_meth)
-          klass.send(:define_method, callback_meth) do
-            observer.send(callback, self) if observer.observer_enabled?
-          end
-          klass.send(callback, callback_meth)
+    ActiveRecord::Callbacks::CALLBACKS.each do |callback|
+      next unless respond_to?(callback)
+      callback_meth = :"_notify_#{observer_name}_for_#{callback}"
+      unless klass.respond_to?(callback_meth)
+        klass.send(:define_method, callback_meth) do
+          observer.send(callback, self) if observer.observer_enabled?
         end
+        klass.send(callback, callback_meth)
       end
     end
+  end
 
-    # Enables interception of custom observer notifications, i.e.
-    #   notify_observers(:custom_notification)
-    def update(*args, &block)
-      super if observer_enabled?
-    end
+  # Enables interception of custom observer notifications, i.e.
+  #   notify_observers(:custom_notification)
+  def update(*args, &block)
+    super if observer_enabled?
+  end
 
-    # Determines whether this observer should be run
-    def observer_enabled?
-      self.class.observer_enabled?(self)
-    end
+  # Determines whether this observer should be run
+  def observer_enabled?
+    self.class.observer_enabled?(self)
   end
 end
 
