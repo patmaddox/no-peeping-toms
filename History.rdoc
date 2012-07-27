@@ -1,3 +1,6 @@
+=== Version 2.0.2 / 2012-07-26
+* Fix deprecation warning
+
 === Version 2.0.1 / 2011-02-16
 * Supports current Rails 3.x release.  No longer supports Rails 2.
 
