@@ -1,40 +1,49 @@
-= no_peeping_toms
+# no-peeping-toms
 
-This plugin disables observers in your specs, so that model specs can run in complete isolation.
+This plugin disables observers in your specs, so that model specs/tests can run in complete isolation.
 
-== Installation
+## Installation
 
 Add to your Gemfile:
 
-  gem 'no_peeping_toms', :git => 'git://github.com/alindeman/no_peeping_toms.git'
+`gem "no_peeping_toms", "~> 2.1.2"`
 
 and run `bundle install`.
 
-no_peeping_toms >= 2.0.0 only supports on Rails 3.  If you need Rails 2 support, use 1.1.0: `gem install no_peeping_toms -v 1.1.0`
+no_peeping_toms >= 2.0.0 only supports on Rails 3.  If you need Rails 2 support, use 1.1.0:
 
-== Usage
+`gem install no_peeping_toms -v 1.1.0`
+
+## Usage
 
 To disable observers, place the following code in your test.rb, or spec_helper.rb, or wherever:
 
-  ActiveRecord::Observer.disable_observers
+```ruby
+ActiveRecord::Observer.disable_observers
+```
 
 You can easily reenable observers:
 
-  ActiveRecord::Observer.enable_observers
+```ruby
+ActiveRecord::Observer.enable_observers
+```
 
 You can choose to run some code with specific observers turned on.  This is useful when spec'ing an observer.  For example, if you write the following observer:
 
-  class PersonObserver < ActiveRecord::Observer
-    def before_update(person)
-      old_person = Person.find person.id
-      if old_person.name != person.name
-        NameChange.create! :person => person, :old_name => old_person.name, :new_name => person.name
-      end
+```ruby
+class PersonObserver < ActiveRecord::Observer
+  def before_update(person)
+    old_person = Person.find person.id
+    if old_person.name != person.name
+      NameChange.create! :person => person, :old_name => old_person.name, :new_name => person.name
     end
   end
+end
+```
 
-You can spec the Person class in complete isolation.
+You can spec the Person class in complete isolation:
 
+```ruby
   describe Person, " when changing a name" do
     before(:each) do
       @person = Person.create! :name => "Pat Maddox"
@@ -54,8 +63,9 @@ You can spec the Person class in complete isolation.
       lambda { @person.update_attribute :name, "Man Without a Name" }.should_not change(NameChange, :count)
     end
   end
+```
 
-== Credits
+## Credits
 
 * Brandon Keepers
 * Corey Haines
@@ -65,4 +75,4 @@ You can spec the Person class in complete isolation.
 * Andy Lindeman
 * Ryan McGeary
 
-Copyright (c) 2007-2011 Pat Maddox, released under the MIT license.
+Copyright (c) 2007-2012 Pat Maddox, released under the MIT license.
