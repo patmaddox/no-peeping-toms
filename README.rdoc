@@ -6,7 +6,7 @@ This plugin disables observers in your specs, so that model specs can run in com
 
 Add to your Gemfile:
 
-  gem 'no_peeping_toms', :git => 'git://github.com/alindeman/no_peeping_toms.git'
+  gem 'no_peeping_toms', :git => 'git://github.com/patmaddox/no-peeping-toms.git'
 
 and run `bundle install`.
 
