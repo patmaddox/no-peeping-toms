@@ -10,7 +10,7 @@ module NoPeepingTomsSpec
   end
 
   class DinnerObserver < ActiveRecord::Observer
-    observe Person
+    observe Person, HungryPerson
     cattr_accessor :called
 
     def ate_dinner(person)
@@ -96,6 +96,17 @@ module NoPeepingTomsSpec
       end
       PersonObserver.called.should be_true
       AnotherObserver.called.should be_true
+    end
+
+    it "should disable currently enabled observer" do
+      PersonObserver.called = false
+      ActiveRecord::Observer.with_observers(NoPeepingTomsSpec::PersonObserver) do
+        Person.observers.disable NoPeepingTomsSpec::PersonObserver do
+          Person.create!
+        end
+      end
+
+      PersonObserver.called.should be_false
     end
 
     it "should not call observers with custom notifications if they are disabled" do
