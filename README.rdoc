@@ -2,6 +2,8 @@
 
 This plugin disables observers in your specs, so that model specs can run in complete isolation.
 
+== NOTE: This functionality is included in Rails 3.1 and above: https://apidock.com/rails/v3.1.0/ActiveModel/ObserverArray/disable. Use that instead!
+
 == Installation
 
 Add to your Gemfile:
