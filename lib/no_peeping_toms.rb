@@ -59,7 +59,7 @@ module NoPeepingToms
       callback_meth = :"_notify_#{observer_name}_for_#{callback}"
       unless klass.respond_to?(callback_meth)
         klass.send(:define_method, callback_meth) do
-          observer.send(callback, self) if observer.observer_enabled?
+          observer.update(callback, self) if observer.observer_enabled?
         end
         klass.send(callback, callback_meth)
       end
